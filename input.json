@@ -1,0 +1,14 @@
+{
+    "inputs": [
+      {
+        "data": [
+          "What is Quantum Computing?"
+        ],
+        "name": "prompt",
+        "shape": [
+          1
+        ],
+        "datatype": "BYTES"
+      }
+    ]
+}
