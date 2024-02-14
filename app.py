@@ -3,7 +3,7 @@ from auto_gptq import AutoGPTQForCausalLM
 
 class InferlessPythonModel:
     def initialize(self):
-        
+
         model_name_or_path = "TheBloke/Mixtral-8x7B-v0.1-GPTQ"
         self.model = AutoGPTQForCausalLM.from_quantized(model_name_or_path,
                 model_basename="model",
@@ -23,7 +23,7 @@ class InferlessPythonModel:
         output = self.model.generate(inputs=input_ids, temperature=0.7, do_sample=True, top_p=0.95, top_k=40, max_new_tokens=512)
         text = self.tokenizer.decode(output[0])
 
-        return {'generated_result': output.shape[1]}
+        return {'generated_result': text}
 
     def finalize(self):
         pass
