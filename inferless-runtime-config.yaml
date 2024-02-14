@@ -3,7 +3,7 @@ build:
   system_packages:
     - "libssl-dev"
   python_packages:
-    - "torch==2.1.0 --index-url https://download.pytorch.org/whl/cu121"
+    - "torch==2.1.0"
     - "gekko==1.0.6"
     - "pandas==2.1.4"
     - "setuptools==69.0.2"
