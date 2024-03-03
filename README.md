@@ -1,10 +1,10 @@
-# Tutorial - Deploy Starling-LM-7B-alpha-GPTQ using Inferless
+# Tutorial - Deploy Mixtral-8x7B-v0.1 using Inferless
 
-Check out [this tutorial](https://tutorials.inferless.com/deploy-mixtral-8x7b-using-inferless) which will guide you through the process of deploying a Starling-LM-7B-alpha-GPTQ model using Inferless.
+Check out [this tutorial](https://tutorials.inferless.com/deploy-mixtral-8x7b-using-inferless) which will guide you through the process of deploying a Mixtral-8x7B-v0.1 model using Inferless.
 
-## TL;DR - Deploy Starling-LM-7B-alpha-GPTQ using Inferless:
-- Deployment of Deploy Starling-LM-7B-alpha-GPTQ model using [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ.git).
-- By using the AutoGPTQ, you can expect an average latency of 5.04 sec, generating an average of 41.99 tokens/sec and an average cold start time of 9.76sec using an A100 GPU(80GB).
+## TL;DR - Deploy Mixtral-8x7B-v0.1 using Inferless:
+- Deployment of Deploy Mixtral-8x7B-v0.1 model using [vLLM](https://github.com/vllm-project/vllm).
+- By using the AutoGPTQ, you can expect an average latency of 7 sec using an A100 GPU(80GB).
 - Dependencies defined in config.yaml.
 - GitHub/GitLab template creation with app.py and config.yaml.
 - Model class in app.py with initialize, infer, and finalize functions.
