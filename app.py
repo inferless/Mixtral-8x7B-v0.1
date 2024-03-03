@@ -1,29 +1,29 @@
-from transformers import AutoTokenizer
-from auto_gptq import AutoGPTQForCausalLM
+import os
+from vllm import SamplingParams
+from vllm import LLM
 
 class InferlessPythonModel:
     def initialize(self):
-
-        model_name_or_path = "TheBloke/Mixtral-8x7B-v0.1-GPTQ"
-        self.model = AutoGPTQForCausalLM.from_quantized(model_name_or_path,
-                model_basename="model",
-                use_safetensors=True,
-                trust_remote_code=False,
-                device="cuda:0",
-                use_triton=False,
-                disable_exllama=True,
-                disable_exllamav2=True,
-                quantize_config=None)
-
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=True, trust_remote_code=False)
-
+        self.template = """SYSTEM: You are a helpful assistant.
+        USER: {}
+        ASSISTANT: """
+        self.llm = LLM(
+          model="TheBloke/Mixtral-8x7B-v0.1-GPTQ",
+          quantization="gptq",
+          dtype="float16")
+    
     def infer(self, inputs):
-        prompts = inputs["prompt"]
-        input_ids = self.tokenizer(prompts, return_tensors='pt').input_ids.cuda()
-        output = self.model.generate(inputs=input_ids, temperature=0.7, do_sample=True, top_p=0.95, top_k=40, max_new_tokens=512)
-        text = self.tokenizer.decode(output[0])
+        prompts = [self.template.format(inputs["questions"])]
+        sampling_params = SamplingParams(
+            temperature=0.75,
+            top_p=1,
+            max_tokens=256,
+            presence_penalty=1.15,
+        )
+        result = self.llm.generate(prompts, sampling_params)
+        result_output = [output.outputs[0].text for output in result]
 
-        return {'generated_result': text}
+        return {"generated_result": result_output[0]}
 
-    def finalize(self):
+    def finalize(self, args):
         pass
