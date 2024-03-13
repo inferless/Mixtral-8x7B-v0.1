@@ -13,7 +13,7 @@ class InferlessPythonModel:
           dtype="float16")
     
     def infer(self, inputs):
-        prompts = [self.template.format(inputs["questions"])]
+        prompts = [self.template.format(inputs["prompt"])]
         sampling_params = SamplingParams(
             temperature=0.75,
             top_p=1,
